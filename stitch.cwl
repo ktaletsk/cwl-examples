@@ -39,14 +39,14 @@ inputs:
       symbols: [UL, UR, LL, LR]
     inputBinding:
       prefix: --gridOrigin
-  # numberingPattern:
-  #   type:
-  #     - "null"
-  #     - type: enum
-  #       label: "Direction"
-  #       symbols: [VERTICALCOMBING, VERTICALCONTINUOUS, HORIZONTALCOMBING, HORIZONTALCONTINUOUS]
-  #   inputBinding:
-  #     prefix: --numberingPattern
+  numberingPattern:
+    type:
+      - "null"
+      - type: enum
+        label: "Direction"
+        symbols: [VERTICALCOMBING, VERTICALCONTINUOUS, HORIZONTALCOMBING, HORIZONTALCONTINUOUS]
+    inputBinding:
+      prefix: --numberingPattern
   gridWidth:
     type: int
     label: "Grid Width"
@@ -57,14 +57,14 @@ inputs:
     label: "Grid Height"
     inputBinding:
       prefix: --gridHeight
-  # startTile:
-  #   type:
-  #     - "null"
-  #     - type: enum
-  #       label: "Start tile"
-  #       symbols: [0, 1]
-  #   inputBinding:
-  #     prefix: --startTile
+  startTile:
+    type:
+      - "null"
+      - type: enum
+        label: "Start tile"
+        symbols: ["0", "1"]
+    inputBinding:
+      prefix: --startTile
   startTileRow:
     type:
       type: enum
