@@ -1,0 +1,27 @@
+imageDir:
+    class: Directory
+    path: /home/taletskiyk2/ls-compute-data/small-fluorescent-dataset
+filenamePatternType: ROWCOL
+filenamePattern: img_r{rrr}_c{ccc}.ome.tif
+gridOrigin: UL
+gridWidth: 5
+gridHeight: 5
+startTileRow: 1
+startTileCol: 1
+startRow: 0
+startCol: 0
+extentWidth: 5
+extentHeight: 5
+isTimeSlices: "false"
+assembleNoOverlap: "False"
+stageRepeatability: 0
+overlapUncertainty: 5
+programType: JAVA
+outputPath: 
+    class: Directory
+    path: /home/taletskiyk2/ls-compute-data/small-fluoro-test-stitch-outputPath
+blending: overlay
+depth: 16U
+output: 
+    class: Directory
+    path: /home/taletskiyk2/ls-compute-data/small-fluoro-test-pyr
