@@ -84,9 +84,6 @@ inputs:
       type: enum
       label: "Stitching Program"
       symbols: [JAVA, FFTW, CUDA]
-  outputPath:
-    type: Directory
-    label: "Output stitching vector"
   blending:
     type:
       - "null"
@@ -98,8 +95,24 @@ inputs:
       type: enum
       symbols: ["8U", "16U"]
       label: "Image depth"
-  expert: string?
-  output: Directory
+  greedy: int
+  applyLabel: string
+  minhole: int
+  minobject: int
+  connectedness:
+    type:
+      type: enum
+      symbols: ["FOUR_CONNECTED","EIGHT_CONNECTED"]
+      label: "Connectedness"
+  iP: string
+  pP: string
+  features: string[]
+  outputPath: Directory
+  pyramidCollection: Directory
+  assembledCollection: Directory
+  segmentedCollection: Directory
+  maskLabeledCollection: Directory
+  featuresCollection: Directory
 outputs:
   stitchVector:
     type: Directory
@@ -107,7 +120,18 @@ outputs:
   pyramid:
     type: Directory
     outputSource: pyramid/output_pyramid
-
+  assembled:
+    type: Directory
+    outputSource: assemble/assembled_collection
+  segmented:
+    type: Directory
+    outputSource: segment/output
+  maskedLabeled:
+    type: Directory
+    outputSource: mask_label/masked_labeled_collection
+  features:
+    type: Directory
+    outputSource: extract_features/output
 steps:
   stitch:
     run: stitch.cwl
@@ -143,6 +167,40 @@ steps:
       inputStitchingVector: stitch/output
       blending: blending
       depth: depth
-      expert: expert
-      output: output
+      output: pyramidCollection
     out: [output_pyramid]
+  assemble:
+    run: assemble.cwl
+    in:
+      inputImages: imageDir
+      inputStitchingVector: stitch/output
+      output: assembledCollection
+    out: [assembled_collection]
+  segment:
+    run: segment.cwl
+    in:
+      images: assemble/assembled_collection
+      output_images: segmentedCollection
+      minhole: minhole
+      minobject: minobject
+      greedy: greedy
+      depth: depth
+      applyLabel: applyLabel
+    out: [output]
+  mask_label:
+    run: mask-label.cwl
+    in:
+      inputImages: segment/output
+      connectedness: connectedness
+      output: maskLabeledCollection
+    out: [masked_labeled_collection]
+  extract_features:
+    run: feature.cwl
+    in:
+      imageDir: assemble/assembled_collection
+      partitionsDir: mask_label/masked_labeled_collection
+      outputDir: featuresCollection
+      iP: iP
+      pP: pP
+      features: features
+    out: [output]

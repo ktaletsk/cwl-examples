@@ -17,11 +17,31 @@ assembleNoOverlap: "False"
 stageRepeatability: 0
 overlapUncertainty: 5
 programType: JAVA
+blending: overlay
+depth: 16U
+minhole: 2000
+minobject: 1000
+greedy: 0
+applyLabel: "false"
+connectedness: "EIGHT_CONNECTED"
+iP: '.*.ome.tif'
+pP: '.*.ome.tif'
+features: [Feature2DJava_Area, Feature2DJava_Mean, Feature2DJava_Aspect_Ratio_BB, Feature2DJava_Centroid]
 outputPath: 
     class: Directory
     path: /home/taletskiyk2/ls-compute-data/small-fluoro-test-stitch-outputPath
-blending: overlay
-depth: 16U
-output: 
+pyramidCollection: 
     class: Directory
     path: /home/taletskiyk2/ls-compute-data/small-fluoro-test-pyr
+assembledCollection:
+    class: Directory
+    path: /home/taletskiyk2/ls-compute-data/small-fluoro-test-assemb-output
+segmentedCollection:
+    class: Directory
+    path: /home/taletskiyk2/ls-compute-data/small-fluoro-test-seg-output
+maskLabeledCollection: 
+    class: Directory
+    path: /home/taletskiyk2/ls-compute-data/small-fluoro-test-label-output
+featuresCollection:
+    class: Directory
+    path: /home/taletskiyk2/ls-compute-data/small-fluoro-test-feat-outputDir
